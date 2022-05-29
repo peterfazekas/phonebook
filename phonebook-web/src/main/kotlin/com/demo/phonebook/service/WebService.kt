@@ -1,8 +1,6 @@
 package com.demo.phonebook.service
 
-import com.demo.phonebook.domain.BusinessCard
 import com.demo.phonebook.domain.WebBusinessCard
-import java.util.*
 
 class WebService(
     private val converter: BusinessCardConverter,
@@ -15,9 +13,27 @@ class WebService(
     fun findBusinessCardById(id :Long): WebBusinessCard =
         converter.convertToWebBusinessCard(phoneBookService.findBusinessCardById(id))
 
-    fun createInitialData() = phoneBookService.createInitialData()
+    fun findBusinessCardByName(name: String): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardByName(name).map { converter.convertToWebBusinessCard(it) }
+
+    fun findBusinessCardByNumber(number: String): WebBusinessCard? =
+        phoneBookService.findBusinessCardByPhoneNumber(number)?.let {  converter.convertToWebBusinessCard(it) }
 
     fun deleteBusinessCardById(id : Long) =
         phoneBookService.deleteBusinessCardById(id)
+
+    fun addBusinessCard(webBusinessCard: WebBusinessCard): WebBusinessCard {
+        val newBusinessCard = converter.convertToBusinessCard(webBusinessCard)
+        val newWebBusinessCard = phoneBookService.addBusinessCardBy(newBusinessCard)
+        return converter.convertToWebBusinessCard(newWebBusinessCard)
+    }
+
+    fun updateBusinessCard(id: Long, webBusinessCard: WebBusinessCard): WebBusinessCard {
+        val businessCard = converter.convertToBusinessCard(webBusinessCard)
+        val updatedWebBusinessCard = phoneBookService.updateBusinessCardBy(id, businessCard)
+        return converter.convertToWebBusinessCard(updatedWebBusinessCard)
+    }
+
+    fun createInitialData() = phoneBookService.createInitialData()
 
 }
