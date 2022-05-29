@@ -12,21 +12,17 @@ class DaoService(private val businessCardRepository: BusinessCardRepository) {
     fun findBusinessCardById(id: Long): Optional<BusinessCardEntity> =
         businessCardRepository.findById(id)
 
-    fun findBusinessCardByFirstName(firstname: String) =
-        businessCardRepository.findByFirstname(firstname)
+    fun findBusinessCardByName(name: String): MutableList<BusinessCardEntity> {
+        val findByName = businessCardRepository.findByFirstname(name)
+        findByName.addAll(businessCardRepository.findByLastname(name))
+        return findByName
+    }
 
-    fun findBusinessCardByLastName(lastname: String) =
-        businessCardRepository.findByLastname(lastname)
-
-    fun findBusinessCardByName(firstname: String, lastname: String) =
-        businessCardRepository.findByFirstnameAndLastname(firstname, lastname)
-
-    fun findBusinessCardByPhoneNumberCategory(phoneNumber: String) =
+    fun findBusinessCardByPhoneNumber(phoneNumber: String) =
         businessCardRepository.findByPhoneNumber(phoneNumber)
 
-    fun saveBusinessCard(businessCardEntity: BusinessCardEntity) {
+    fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity =
         businessCardRepository.save(businessCardEntity)
-    }
 
     fun deleteBusinessCardById(id: Long) =
         businessCardRepository.deleteById(id)

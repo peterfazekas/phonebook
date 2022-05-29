@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration
 class DaoConfig {
 
     @Autowired
-    lateinit var businessCardRepository : BusinessCardRepository
+    lateinit var businessCardRepository: BusinessCardRepository
 
     @Bean
     fun daoService() = DaoService(businessCardRepository)
