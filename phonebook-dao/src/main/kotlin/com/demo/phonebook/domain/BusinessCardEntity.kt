@@ -9,4 +9,5 @@ data class BusinessCardEntity(
     val id : Long,
     val firstname : String,
     val lastname : String,
+    @Column(name="phone_number")
     val phoneNumber : String)
