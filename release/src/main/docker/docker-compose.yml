@@ -2,6 +2,20 @@ version: "3.9"
 
 services:
 
+  phonebook_db:
+    container_name: phonebook_mysql
+    restart: always
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=phonebook
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASS=pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - phonebook-volume:/var/lib/mysql
+
   phonebook:
     container_name: phonebook_application
     depends_on:
@@ -9,3 +23,8 @@ services:
     image: phonebook:latest
     ports:
       - "8080:8080"
+    environment:
+      - spring.profiles.active=prod
+
+volumes:
+  phonebook-volume:
