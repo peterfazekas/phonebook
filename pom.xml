@@ -8,7 +8,6 @@
         <module>phonebook-service</module>
         <module>phonebook-web</module>
         <module>phonebook-application</module>
-        <module>release</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
