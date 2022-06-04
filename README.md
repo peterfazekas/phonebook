@@ -5,11 +5,12 @@ This is a Spring Boot based REST application written in Kotlin - a phone registe
 
 ## Modules
 
-The application has 4 modules:
+The application has 5 modules:
 - `phonebook-dao`: defines the Data Access Layer for the database.
 - `phonebook-service`: defines the business logic. A bridge between DAO and the WEB module.
 - `phonebook-web`: contains the REST controllers.
 - `phonebook-application`: contains the main method (the entry point for the application).
+- `release`: contains `Dockerfile` and `docker-compose.yml` for dockerization.
 
 ## Branches
 The repo has 3 branches:
@@ -30,7 +31,61 @@ There are several ways to run the application
 1. With IDE: you can use IDE build in run support. Find the `com.demo.phonebook.PhonebookApplication` class and run the `main` method with IDE.
 2. Run with JDK: after bou built the application with maven, you cen run it with JDK:
 ```text
-java -jar .\phonebook-application\target\phonebook-exec.jar
+java -jar phonebook-application/target/phonebook-exec.jar
+```
+
+## Run the application in Docker
+
+During the maven build a `phonebook` docker image is created with maven `docker-maven-plugin`.
+
+You can check whether the phonebook image exists:
+```text
+docker image ls 
+```
+or
+```text
+docker images
+```
+Output should be:
+```text
+PS C:\git\phonebook> docker image ls
+REPOSITORY      TAG         IMAGE ID       CREATED          SIZE
+phonebook       latest      70d643e84cae   33 minutes ago   203MB
+```
+### Run docker container with docker
+
+You can dun the phonebook image as a container:
+```text
+docker container run -d -p 8080:8080 --name phonebook_application phonebook
+```
+or
+```text
+docker run -d -p 8080:8080 --name phonebook_application phonebook
+```
+
+### Run docker container with docker-compose
+
+You can dun the phonebook application with docker-compose:
+```text
+docker-compose -f release/src/main/docker/docker-compose.yml up
+```
+
+### Check running docker containers 
+You can check your running container with `docker ps` command:
+```text
+$ docker ps
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                    NAMES
+4bd627c86531   phonebook:latest   "java -jar phonebook…"   17 seconds ago   Up 16 seconds   0.0.0.0:8080->8080/tcp   phonebook_application
+```
+### Stop and remove docker container
+
+You can stop the application
+```text
+docker container stop phonebook_application
+```
+You can remove the container:
+```text
+docker container rm phonebook_application
 ```
 
 ## Use the application
@@ -38,6 +93,5 @@ After you started the application you can find the `swagger-ui` in your favorite
 ```text
 http://localhost:8080/swagger-ui.html
 ```
-
 ---
-Switch to branch `dockerize-1-h2` or `dockerize-2-mysql` for updated README
+Switch to branch `dockerize-2-mysql` for updated README
