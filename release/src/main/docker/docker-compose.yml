@@ -4,8 +4,8 @@ services:
 
   phonebook_db:
     container_name: phonebook_mysql
-    restart: always
     image: mysql:latest
+    restart: always
     environment:
       - MYSQL_DATABASE=phonebook
       - MYSQL_ROOT_PASSWORD=root
@@ -19,6 +19,7 @@ services:
   phonebook:
     container_name: phonebook_application
     image: phonebook:latest
+    restart: always
     ports:
       - "8080:8080"
     environment:

@@ -27,6 +27,8 @@ mvn clean install
 
 ## Run the application
 
+Note: When application is running locally it uses H2 in memory database.
+
 There are several ways to run the application
 1. With IDE: you can use IDE build in run support. Find the `com.demo.phonebook.PhonebookApplication` class and run the `main` method with IDE.
 2. Run with JDK: after bou built the application with maven, you cen run it with JDK:
@@ -36,36 +38,9 @@ java -jar phonebook-application/target/phonebook-exec.jar
 
 ## Run the application in Docker
 
-During the maven build a `phonebook` docker image is created with maven `docker-maven-plugin`.
+Note: When application is running in Docker it uses MySQL database and it will persist data.
 
-You can check whether the phonebook image exists:
-```text
-docker image ls 
-```
-or
-```text
-docker images
-```
-Output should be:
-```text
-PS C:\git\phonebook> docker image ls
-REPOSITORY      TAG         IMAGE ID       CREATED          SIZE
-phonebook       latest      70d643e84cae   33 minutes ago   203MB
-```
-### Run docker container with docker
-
-You can dun the phonebook image as a container:
-```text
-docker container run -d -p 8080:8080 --name phonebook_application phonebook
-```
-or
-```text
-docker run -d -p 8080:8080 --name phonebook_application phonebook
-```
-
-### Run docker container with docker-compose
-
-You can dun the phonebook application with docker-compose:
+You can run the phonebook application with docker-compose:
 ```text
 docker-compose -f release/src/main/docker/docker-compose.yml up
 ```
