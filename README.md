@@ -34,7 +34,10 @@ java -jar .\phonebook-application\target\phonebook-exec.jar
 ```
 
 ## Use the application
-After you started the application you can find the `swagger-ui` in your favorite browser:
+After you started the application you can find the `swagger-ui` in your favorite browser to reach REST endpoints:
 ```text
 http://localhost:8080/swagger-ui.html
 ```
+
+---
+Switch to branch `dockerize-1-h2` or `dockerize-2-mysql` for updated README
