@@ -65,7 +65,7 @@ docker run -d -p 8080:8080 --name phonebook_application phonebook
 
 ### Run docker container with docker-compose
 
-You can dun the phonebook application with docker-compose:
+You can run the phonebook application with docker-compose:
 ```text
 docker-compose -f release/src/main/docker/docker-compose.yml up
 ```
