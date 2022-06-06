@@ -42,7 +42,13 @@ Note: When application is running in Docker it uses MySQL database and it will p
 
 You can run the phonebook application with docker-compose:
 ```text
-docker-compose -f release/src/main/docker/docker-compose.yml up
+docker-compose up -d
+```
+### Stop and remove docker container
+
+You can stop the application and remove the containers: 
+```text
+docker-compose down
 ```
 
 ### Check running docker containers 
@@ -51,16 +57,6 @@ You can check your running container with `docker ps` command:
 $ docker ps
 CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                    NAMES
 4bd627c86531   phonebook:latest   "java -jar phonebook…"   17 seconds ago   Up 16 seconds   0.0.0.0:8080->8080/tcp   phonebook_application
-```
-### Stop and remove docker container
-
-You can stop the application
-```text
-docker container stop phonebook_application
-```
-You can remove the container:
-```text
-docker container rm phonebook_application
 ```
 
 ## Use the application
