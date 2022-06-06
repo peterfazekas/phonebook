@@ -63,13 +63,6 @@ or
 docker run -d -p 8080:8080 --name phonebook_application phonebook
 ```
 
-### Run docker container with docker-compose
-
-You can run the phonebook application with docker-compose:
-```text
-docker-compose -f release/src/main/docker/docker-compose.yml up
-```
-
 ### Check running docker containers 
 You can check your running container with `docker ps` command:
 ```text
@@ -86,6 +79,18 @@ docker container stop phonebook_application
 You can remove the container:
 ```text
 docker container rm phonebook_application
+```
+
+### Run docker container with docker-compose
+
+You can run the phonebook application with docker-compose:
+```text
+docker-compose up -d
+```
+
+You can stop the phonebook application with docker-compose:
+```text
+docker-compose down
 ```
 
 ## Use the application
