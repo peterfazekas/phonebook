@@ -2,6 +2,17 @@ version: "3.9"
 
 services:
 
+  phonebook:
+    container_name: phonebook_application
+    image: phonebook:latest
+    depends_on:
+      - phonebook_db
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.profiles.active=prod
+
   phonebook_db:
     container_name: phonebook_mysql
     image: mysql:latest
@@ -15,15 +26,6 @@ services:
       - "3306:3306"
     volumes:
       - phonebook-volume:/var/lib/mysql
-
-  phonebook:
-    container_name: phonebook_application
-    image: phonebook:latest
-    restart: always
-    ports:
-      - "8080:8080"
-    environment:
-      - spring.profiles.active=prod
 
 volumes:
   phonebook-volume:
