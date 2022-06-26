@@ -23,6 +23,5 @@ data class WebBusinessCard(
     val lastname : String,
 
     @NotNull
-    @Pattern(regexp="^+\\d{12}")
-    @Schema(description = "Phone number", example = "+36301234567", pattern = "^+\\d{12}")
-    val phoneNumber : String)
+    @Schema(description = "List of phone numbers")
+    val phoneNumbers : List<WebPhoneNumber>)

@@ -31,6 +31,7 @@ class PhoneBookService(
     fun addBusinessCardBy(businessCard: BusinessCard): BusinessCard {
         val newEntity = converter.convertToBusinessCardEntity(businessCard)
         val saveBusinessCard = daoService.saveBusinessCard(newEntity)
+
         return converter.convertToBusinessCard(saveBusinessCard)
     }
 
@@ -39,7 +40,7 @@ class PhoneBookService(
         if (findBusinessCardById.id != id) {
             throw DifferentBusinessCardException("Business id's are differs! Original id: $id, updated id: ${findBusinessCardById.id}")
         }
-        val updatedBusinessCard = BusinessCard(id, businessCard.firstname, businessCard.lastname, businessCard.phoneNumber)
+        val updatedBusinessCard = BusinessCard(id, businessCard.firstname, businessCard.lastname, businessCard.phoneNumbers)
         val updatedBusinessCardEntity = converter.convertToBusinessCardEntity(updatedBusinessCard)
         val savedBusinessCard = daoService.saveBusinessCard(updatedBusinessCardEntity)
         return converter.convertToBusinessCard(savedBusinessCard)

@@ -2,9 +2,13 @@ package com.demo.phonebook.service
 
 import com.demo.phonebook.domain.BusinessCardEntity
 import com.demo.phonebook.repository.BusinessCardRepository
+import com.demo.phonebook.repository.PhoneNumberRepository
 import java.util.Optional
 
-class DaoService(private val businessCardRepository: BusinessCardRepository) {
+class DaoService(
+    private val businessCardRepository: BusinessCardRepository,
+    private val phoneNumberRepository: PhoneNumberRepository
+) {
 
     fun findAllBusinessCard(): List<BusinessCardEntity> =
         businessCardRepository.findAll()
@@ -18,11 +22,16 @@ class DaoService(private val businessCardRepository: BusinessCardRepository) {
         return findByName
     }
 
-    fun findBusinessCardByPhoneNumber(phoneNumber: String) =
-        businessCardRepository.findByPhoneNumber(phoneNumber)
+    fun findBusinessCardByPhoneNumber(phoneNumber: String): BusinessCardEntity? {
+        val findByNumber = phoneNumberRepository.findByNumber(phoneNumber)
+        return findByNumber?.let { findAllBusinessCard().first { it == findByNumber.businessCard } }
+    }
 
-    fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity =
+    fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity {
         businessCardRepository.save(businessCardEntity)
+        businessCardEntity.phoneNumbers.forEach { phoneNumberRepository.save(it) }
+        return businessCardEntity
+    }
 
     fun deleteBusinessCardById(id: Long) =
         businessCardRepository.deleteById(id)
