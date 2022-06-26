@@ -7,28 +7,25 @@ import com.demo.phonebook.domain.PhoneNumberEntity
 
 class BusinessCardEntityConverter {
 
-    fun convertToBusinessCardEntity(businessCard : BusinessCard) : BusinessCardEntity{
-        val businessCardEntity = BusinessCardEntity(
+    fun convertToBusinessCardEntity(businessCard: BusinessCard) =
+        BusinessCardEntity(
             businessCard.id,
             businessCard.firstname,
-            businessCard.lastname
-        )
-        businessCardEntity.phoneNumbers = convertToPhoneNumberEntity(businessCard.phoneNumbers, businessCardEntity)
-        return businessCardEntity
-    }
+            businessCard.lastname)
 
-    private fun convertToPhoneNumberEntity(phoneNumbers: List<PhoneNumber>, businessCardEntity: BusinessCardEntity) =
-        phoneNumbers.map { PhoneNumberEntity(it.id, it.type, it.number, businessCardEntity) }
+    fun convertToPhoneNumberEntity(businessCard: BusinessCard) =
+        businessCard.phoneNumbers.map { PhoneNumberEntity(it.id, it.type, it.number, businessCard.id) }
 
 
-    fun convertToBusinessCard(businessCardEntity : BusinessCardEntity) =
+    fun convertToBusinessCard(businessCardEntity: BusinessCardEntity, phoneNumberEntities: List<PhoneNumberEntity>) =
         BusinessCard(
             businessCardEntity.id,
             businessCardEntity.firstname,
             businessCardEntity.lastname,
-            convertToPhoneNumber(businessCardEntity.phoneNumbers))
+            convertToPhoneNumber(businessCardEntity.id, phoneNumberEntities))
 
-    private fun convertToPhoneNumber(phoneNumberEntities: List<PhoneNumberEntity>) =
-        phoneNumberEntities.map { PhoneNumber(it.id, it.type, it.number) }
-
+    private fun convertToPhoneNumber(cardId: Long, phoneNumberEntities: List<PhoneNumberEntity>) =
+        phoneNumberEntities
+            .filter { it.cardId == cardId }
+            .map { PhoneNumber(it.id, it.type, it.number) }
 }

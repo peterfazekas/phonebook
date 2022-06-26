@@ -1,38 +1,35 @@
 package com.demo.phonebook.service
 
 import com.demo.phonebook.domain.BusinessCardEntity
-import com.demo.phonebook.repository.BusinessCardRepository
-import com.demo.phonebook.repository.PhoneNumberRepository
-import java.util.Optional
+import org.springframework.jdbc.core.JdbcTemplate
+import java.util.*
 
 class DaoService(
-    private val businessCardRepository: BusinessCardRepository,
-    private val phoneNumberRepository: PhoneNumberRepository
-) {
+    private val jdbcTemplate: JdbcTemplate,
+    private val businessCardRowMapper: BusinessCardRowMapper,
+    private val phoneNumberRowMapper: PhoneNumberRowMapper) {
 
     fun findAllBusinessCard(): List<BusinessCardEntity> =
-        businessCardRepository.findAll()
+        jdbcTemplate.query("SELECT * FROM EMPLOYEE", businessCardRowMapper)
 
     fun findBusinessCardById(id: Long): Optional<BusinessCardEntity> =
-        businessCardRepository.findById(id)
+        Optional.empty()
 
     fun findBusinessCardByName(name: String): MutableList<BusinessCardEntity> {
-        val findByName = businessCardRepository.findByFirstname(name)
-        findByName.addAll(businessCardRepository.findByLastname(name))
-        return findByName
+        return mutableListOf()
     }
 
     fun findBusinessCardByPhoneNumber(phoneNumber: String): BusinessCardEntity? {
-        val findByNumber = phoneNumberRepository.findByNumber(phoneNumber)
-        return findByNumber?.let { findAllBusinessCard().first { it == findByNumber.businessCard } }
+        return null
     }
 
     fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity {
-        businessCardRepository.save(businessCardEntity)
-        businessCardEntity.phoneNumbers.forEach { phoneNumberRepository.save(it) }
-        return businessCardEntity
+        jdbcTemplate.execute("INSERT INTO CARD VALUES (?, ?, ?)");
+        return BusinessCardEntity(0, "test", "test")
     }
 
-    fun deleteBusinessCardById(id: Long) =
-        businessCardRepository.deleteById(id)
+    fun deleteBusinessCardById(id: Long) {
+
+    }
+
 }

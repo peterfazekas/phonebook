@@ -29,8 +29,9 @@ class PhoneBookService(
     }
 
     fun addBusinessCardBy(businessCard: BusinessCard): BusinessCard {
-        val newEntity = converter.convertToBusinessCardEntity(businessCard)
-        val saveBusinessCard = daoService.saveBusinessCard(newEntity)
+        val convertToBusinessCardEntity = converter.convertToBusinessCardEntity(businessCard)
+        val convertToPhoneNumberEntity = converter.convertToPhoneNumberEntity(businessCard)
+        val saveBusinessCard = daoService.saveBusinessCard(convertToBusinessCardEntity)
 
         return converter.convertToBusinessCard(saveBusinessCard)
     }
