@@ -36,7 +36,7 @@ class PhoneBookController {
 
     @GetMapping("/{id}")
     @Operation(summary = "List business card by id")
-    fun getBusinessCardById(@PathVariable id: Long): WebBusinessCard {
+    fun getBusinessCardById(@PathVariable id: Long): List<WebBusinessCard> {
         logger.info("GET /$id endpoint called")
         return service.findBusinessCardById(id)
     }
@@ -58,9 +58,16 @@ class PhoneBookController {
 
     @GetMapping("/number/{number}")
     @Operation(summary = "List business cards by phone number")
-    fun getBusinessCardByNumber(@PathVariable number: String): WebBusinessCard? {
+    fun getBusinessCardByNumber(@PathVariable number: String): List<WebBusinessCard> {
         logger.info("GET /number/$number endpoint called")
         return service.findBusinessCardByNumber(number)
+    }
+
+    @GetMapping("/type/{type}")
+    @Operation(summary = "List business cards by type")
+    fun getBusinessCardByType(@PathVariable type: String): List<WebBusinessCard> {
+        logger.info("GET /type/$type endpoint called")
+        return service.findBusinessCardByType(type)
     }
 
     @DeleteMapping("/delete/{id}")

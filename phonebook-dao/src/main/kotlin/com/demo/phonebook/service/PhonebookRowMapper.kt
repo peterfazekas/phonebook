@@ -7,7 +7,7 @@ import java.sql.ResultSet
 
 class BusinessCardRowMapper : RowMapper<BusinessCardEntity> {
     override fun mapRow(rs: ResultSet, rowNum: Int) = BusinessCardEntity(
-        rs.getLong("id"),
+        rs.getLong("card_id"),
         rs.getString("firstname"),
         rs.getString("lastname")
     )
@@ -15,9 +15,9 @@ class BusinessCardRowMapper : RowMapper<BusinessCardEntity> {
 
 class PhoneNumberRowMapper : RowMapper<PhoneNumberEntity> {
     override fun mapRow(rs: ResultSet, rowNum: Int) = PhoneNumberEntity(
-            rs.getLong("id"),
+            rs.getLong("number_id"),
             rs.getString("type"),
             rs.getString("number"),
-            rs.getLong("cardId")
+            rs.getLong("card_id")
     )
 }

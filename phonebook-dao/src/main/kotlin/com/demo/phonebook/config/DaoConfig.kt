@@ -6,27 +6,23 @@ import com.demo.phonebook.service.PhoneNumberRowMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.datasource.DriverManagerDataSource
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
+import javax.sql.DataSource
 
 
 @Configuration
 class DaoConfig {
 
     @Bean
-    fun dataSource() =
-        DriverManagerDataSource().apply {
-            setDriverClassName("org.h2.Driver")
-            url = "jdbc:h2:mem:phonebook"
-            username = "sa"
-        }
-
-//    @Bean
-//    fun dataSource(): DataSource? {
-//        return EmbeddedDatabaseBuilder()
-//            .setType(EmbeddedDatabaseType.H2)
-//            .addScript("classpath:jdbc/schema.sql")
-//            .addScript("classpath:jdbc/test-data.sql").build()
-//    }
+    fun dataSource(): DataSource {
+        return EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .setName("phonebook")
+            .addScript("classpath:schema.sql")
+            .build()
+    }
 
     @Bean
     fun businessCardRowMapper() = BusinessCardRowMapper()
@@ -38,5 +34,10 @@ class DaoConfig {
     fun jdbcTemplate() = JdbcTemplate(dataSource())
 
     @Bean
-    fun daoService() = DaoService(jdbcTemplate(), businessCardRowMapper(), phoneNumberRowMapper())
+    fun namedJdbcTemplate () = NamedParameterJdbcTemplate(dataSource())
+
+    @Bean
+    fun daoService() = DaoService(jdbcTemplate(), namedJdbcTemplate(), businessCardRowMapper(), phoneNumberRowMapper())
 }
+
+

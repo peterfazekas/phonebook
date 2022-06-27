@@ -10,14 +10,17 @@ class WebService(
         return phoneBookService.findAllBusinessCard().map { converter.convertToWebBusinessCard(it) }
     }
 
-    fun findBusinessCardById(id :Long): WebBusinessCard =
-        converter.convertToWebBusinessCard(phoneBookService.findBusinessCardById(id))
+    fun findBusinessCardById(id :Long): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardById(id).map { converter.convertToWebBusinessCard(it) }
 
     fun findBusinessCardByName(name: String): List<WebBusinessCard> =
         phoneBookService.findBusinessCardByName(name).map { converter.convertToWebBusinessCard(it) }
 
-    fun findBusinessCardByNumber(number: String): WebBusinessCard? =
-        phoneBookService.findBusinessCardByPhoneNumber(number)?.let {  converter.convertToWebBusinessCard(it) }
+    fun findBusinessCardByNumber(number: String): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardByPhoneNumber(number).map { converter.convertToWebBusinessCard(it) }
+
+    fun findBusinessCardByType(type: String): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardByType(type).map { converter.convertToWebBusinessCard(it) }
 
     fun deleteBusinessCardById(id : Long) =
         phoneBookService.deleteBusinessCardById(id)
