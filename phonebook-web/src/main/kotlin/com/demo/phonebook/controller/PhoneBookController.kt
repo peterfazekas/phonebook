@@ -63,6 +63,13 @@ class PhoneBookController {
         return service.findBusinessCardByNumber(number)
     }
 
+    @GetMapping("/type/{type}")
+    @Operation(summary = "List business cards by phone number type")
+    fun getBusinessCardByType(@PathVariable type: String): List<WebBusinessCard> {
+        logger.info("GET /number/$type endpoint called")
+        return service.findBusinessCardByByType(type)
+    }
+
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete business card by id")
     fun deleteBusinessCard(@PathVariable id: Long): SuccessResponse {

@@ -19,6 +19,9 @@ class WebService(
     fun findBusinessCardByNumber(number: String): WebBusinessCard? =
         phoneBookService.findBusinessCardByPhoneNumber(number)?.let {  converter.convertToWebBusinessCard(it) }
 
+    fun findBusinessCardByByType(type: String): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardByType(type).map { converter.convertToWebBusinessCard(it) }
+
     fun deleteBusinessCardById(id : Long) =
         phoneBookService.deleteBusinessCardById(id)
 

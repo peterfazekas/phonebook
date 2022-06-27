@@ -27,6 +27,12 @@ class DaoService(
         return findByNumber?.let { findAllBusinessCard().first { it == findByNumber.businessCard } }
     }
 
+    fun findBusinessCardByType(type: String): List<BusinessCardEntity> {
+        val findByNumber = phoneNumberRepository.findByType(type)
+        val map = findByNumber.map { it.businessCard.id }.toList()
+        return findAllBusinessCard().filter { map.contains(it.id) }
+    }
+
     fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity {
         businessCardRepository.save(businessCardEntity)
         businessCardEntity.phoneNumbers.forEach { phoneNumberRepository.save(it) }

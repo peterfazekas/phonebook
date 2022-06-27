@@ -23,6 +23,9 @@ class PhoneBookService(
     fun findBusinessCardByPhoneNumber(phoneNumber: String): BusinessCard? =
         daoService.findBusinessCardByPhoneNumber(phoneNumber)?.let { converter.convertToBusinessCard(it) }
 
+    fun findBusinessCardByType(type: String): List<BusinessCard> =
+        daoService.findBusinessCardByType(type).map { converter.convertToBusinessCard(it) }
+
     fun deleteBusinessCardById(id: Long) {
         daoService.findBusinessCardById(id).map { daoService.deleteBusinessCardById(id) }
             .orElseThrow { NoSuchBusinessCardException("No card found with id $id") }
