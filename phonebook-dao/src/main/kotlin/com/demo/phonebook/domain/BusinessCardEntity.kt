@@ -13,7 +13,7 @@ data class BusinessCardEntity(
     val firstname: String,
     val lastname: String
 ) {
-    @OneToMany(mappedBy = "businessCard")
+    @OneToMany(mappedBy = "businessCard", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     lateinit var phoneNumbers: List<PhoneNumberEntity>
 }
