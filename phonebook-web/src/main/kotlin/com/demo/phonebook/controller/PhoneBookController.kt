@@ -58,7 +58,7 @@ class PhoneBookController {
 
     @GetMapping("/number/{number}")
     @Operation(summary = "List business cards by phone number")
-    fun getBusinessCardByNumber(@PathVariable number: String): WebBusinessCard? {
+    fun getBusinessCardByNumber(@PathVariable number: String): List<WebBusinessCard> {
         logger.info("GET /number/$number endpoint called")
         return service.findBusinessCardByNumber(number)
     }

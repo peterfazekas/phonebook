@@ -5,11 +5,11 @@ import com.demo.phonebook.repository.BusinessCardRepository
 import com.demo.phonebook.repository.PhoneNumberRepository
 import java.util.Optional
 
+
 class DaoService(
     private val businessCardRepository: BusinessCardRepository,
     private val phoneNumberRepository: PhoneNumberRepository
 ) {
-
     fun findAllBusinessCard(): List<BusinessCardEntity> =
         businessCardRepository.findAll()
 
@@ -22,16 +22,11 @@ class DaoService(
         return findByName
     }
 
-    fun findBusinessCardByPhoneNumber(phoneNumber: String): BusinessCardEntity? {
-        val findByNumber = phoneNumberRepository.findByNumber(phoneNumber)
-        return findByNumber?.let { findAllBusinessCard().first { it == findByNumber.businessCard } }
-    }
+    fun findBusinessCardByPhoneNumber(phoneNumber: String): MutableList<BusinessCardEntity> =
+        businessCardRepository.findByPhoneNumber(phoneNumber)
 
-    fun findBusinessCardByType(type: String): List<BusinessCardEntity> {
-        val findByNumber = phoneNumberRepository.findByType(type)
-        val map = findByNumber.map { it.businessCard.id }.toList()
-        return findAllBusinessCard().filter { map.contains(it.id) }
-    }
+    fun findBusinessCardByType(type: String): MutableList<BusinessCardEntity> =
+        businessCardRepository.findByType(type)
 
     fun saveBusinessCard(businessCardEntity: BusinessCardEntity): BusinessCardEntity {
         businessCardRepository.save(businessCardEntity)

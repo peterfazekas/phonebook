@@ -16,8 +16,8 @@ class WebService(
     fun findBusinessCardByName(name: String): List<WebBusinessCard> =
         phoneBookService.findBusinessCardByName(name).map { converter.convertToWebBusinessCard(it) }
 
-    fun findBusinessCardByNumber(number: String): WebBusinessCard? =
-        phoneBookService.findBusinessCardByPhoneNumber(number)?.let {  converter.convertToWebBusinessCard(it) }
+    fun findBusinessCardByNumber(number: String): List<WebBusinessCard> =
+        phoneBookService.findBusinessCardByPhoneNumber(number).map { converter.convertToWebBusinessCard(it) }
 
     fun findBusinessCardByByType(type: String): List<WebBusinessCard> =
         phoneBookService.findBusinessCardByType(type).map { converter.convertToWebBusinessCard(it) }

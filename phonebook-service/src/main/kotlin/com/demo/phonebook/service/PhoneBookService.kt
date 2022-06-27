@@ -20,8 +20,8 @@ class PhoneBookService(
     fun findBusinessCardByName(name: String): List<BusinessCard> =
         daoService.findBusinessCardByName(name).map { converter.convertToBusinessCard(it) }
 
-    fun findBusinessCardByPhoneNumber(phoneNumber: String): BusinessCard? =
-        daoService.findBusinessCardByPhoneNumber(phoneNumber)?.let { converter.convertToBusinessCard(it) }
+    fun findBusinessCardByPhoneNumber(phoneNumber: String): List<BusinessCard> =
+        daoService.findBusinessCardByPhoneNumber(phoneNumber).map { converter.convertToBusinessCard(it) }
 
     fun findBusinessCardByType(type: String): List<BusinessCard> =
         daoService.findBusinessCardByType(type).map { converter.convertToBusinessCard(it) }
