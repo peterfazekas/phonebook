@@ -1,8 +1,11 @@
 package com.demo.phonebook.domain
 
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -18,5 +21,6 @@ data class BusinessCardEntity(
     val lastname: String
 ) {
     @OneToMany(mappedBy = "businessCard", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
     lateinit var phoneNumbers: List<PhoneNumberEntity>
 }
