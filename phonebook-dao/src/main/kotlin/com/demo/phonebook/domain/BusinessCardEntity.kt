@@ -1,7 +1,5 @@
 package com.demo.phonebook.domain
 
-import org.hibernate.annotations.Fetch
-import org.hibernate.annotations.FetchMode
 import javax.persistence.*
 
 @Entity(name = "business_card")
@@ -14,6 +12,5 @@ data class BusinessCardEntity(
     val lastname: String
 ) {
     @OneToMany(mappedBy = "businessCard", cascade = [CascadeType.REMOVE], orphanRemoval = true)
-    @Fetch(FetchMode.SUBSELECT)
     lateinit var phoneNumbers: List<PhoneNumberEntity>
 }
