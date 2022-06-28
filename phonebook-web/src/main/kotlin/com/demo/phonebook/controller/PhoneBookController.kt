@@ -66,7 +66,7 @@ class PhoneBookController {
     @GetMapping("/type/{type}")
     @Operation(summary = "List business cards by phone number type")
     fun getBusinessCardByType(@PathVariable type: String): List<WebBusinessCard> {
-        logger.info("GET /number/$type endpoint called")
+        logger.info("GET /type/$type endpoint called")
         return service.findBusinessCardByByType(type)
     }
 
