@@ -1,6 +1,6 @@
 package com.demo.phonebook.domain
 
-class PhoneNumberEntity(
+data class PhoneNumberEntity(
     val id : Long,
     val type : String,
     val number : String,
