@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: phonebook
+spec:
+  containers:
+  - name: phonebook
+    image: phonebook:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 8080
