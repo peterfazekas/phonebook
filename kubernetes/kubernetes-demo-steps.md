@@ -42,7 +42,7 @@ kubectl logs phonebook
 kubectl get pods
 kubectl describe pods phonebook
 
-curl -X GET <IP>:8080
+curl -X GET <IP>:8080 | jq
 ```
 
 #### Remove pod
@@ -76,7 +76,7 @@ kubectl get services
 kubectl describe deployment phonebook
 kubectl describe pods <PODNAME>
 
-curl -X GET  <IP>:8080
+curl -X GET  <IP>:8080 | jq
 ```
 
 #### Check logs
@@ -90,9 +90,9 @@ kubectl logs <PODNAME>
 ```
 kubectl expose deployment phonebook --type=LoadBalancer --name=phonebook-service
 
-curl -X GET localhost:8080
+curl -X GET localhost:8080 | jq
 curl -X PATCH localhost:8080/init
-curl -X GET localhost:8080
+curl -X GET localhost:8080 | jq
 
 kubectl logs <PODNAME>
 ```
@@ -133,9 +133,9 @@ kubectl get services
 kubectl describe deployment phonebook
 kubectl describe pods <PODNAME>
 
-curl -X GET localhost
+curl -X GET localhost | jq
 curl -X PATCH localhost/init
-curl -X GET localhost
+curl -X GET localhost | jq
 kubectl logs <PODNAME>
 ```
 
@@ -177,12 +177,12 @@ kubectl describe deployment phonebook
 kubectl describe pods <PODNAME-1>
 kubectl describe pods <PODNAME-2>
 
-curl -X GET localhost
+curl -X GET localhost | jq
 curl -X PATCH localhost/init
-curl -X GET localhost
-curl -X GET localhost
-curl -X GET localhost
-curl -X GET localhost
+curl -X GET localhost | jq
+curl -X GET localhost | jq
+curl -X GET localhost | jq
+curl -X GET localhost | jq
 kubectl logs <PODNAME-1>
 kubectl logs <PODNAME-2>
 ```
