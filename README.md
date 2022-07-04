@@ -3,6 +3,10 @@ This is a demo application for how to dockerize application.
 
 This is a Spring Boot based REST application written in Kotlin - a phone register stores person's first name, last name, and phone number.
 
+## Kubernetes demo
+
+For Kubernetes demo please consult the [documentation](kubernetes/kubernetes-demo-steps.md).
+
 ## Modules
 
 The application has 5 modules:
