@@ -16,7 +16,7 @@ kubectl get services
 ---
 ## Deploy phonebook application to kubernetes Cluster
 
-### Deploy 1-pod.yaml
+### Deploy [1-pod.yaml](1-pod.yaml)
 
 #### Check 1-pod.yaml
 
@@ -52,7 +52,7 @@ kubectl delete -f 1-pod.yaml
 kubectl get pods
 ```
 ---
-### Deploy 2-deployment.yaml
+### Deploy [2-deployment.yaml](2-deployment.yaml)
 
 #### Check 2-deployment.yaml
 
@@ -109,7 +109,7 @@ kubectl get replicaset
 kubectl get pods
 ```
 ---
-### Deploy 3-service.yaml
+### Deploy [3-service.yaml](3-service.yaml)
 
 #### Check 3-service.yaml
 
@@ -150,7 +150,7 @@ kubectl get replicaset
 kubectl get pods
 ```
 ---
-### Deploy 4-replicas.yaml
+### Deploy [4-replicas.yaml](4-replicas.yaml)
 
 #### Check 4-replicas.yaml
 
