@@ -13,6 +13,13 @@ kubectl get deployments
 kubectl get replicasets
 kubectl get services
 ```
+
+or 
+
+```
+kubectl get all
+```
+
 ---
 ## Deploy phonebook application to kubernetes Cluster
 
@@ -69,10 +76,7 @@ kubectl apply -f 2-deployment.yaml
 #### Check pod
 
 ```
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
-kubectl get services
+kubectl get all
 kubectl describe deployment phonebook
 kubectl describe pods <PODNAME>
 
@@ -103,10 +107,7 @@ kubectl logs <PODNAME>
 kubectl delete services phonebook-service
 kubectl delete -f 2-deployment.yaml
 
-kubectl get services
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
+kubectl get all
 ```
 ---
 ### Deploy [3-service.yaml](3-service.yaml)
@@ -126,10 +127,7 @@ kubectl apply -f 3-service.yaml
 #### Check pod
 
 ```
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
-kubectl get services
+kubectl get all
 kubectl describe deployment phonebook
 kubectl describe pods <PODNAME>
 
@@ -144,10 +142,7 @@ kubectl logs <PODNAME>
 ```
 kubectl delete -f 3-service.yaml
 
-kubectl get services
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
+kubectl get all
 ```
 ---
 ### Deploy [4-replicas.yaml](4-replicas.yaml)
@@ -169,10 +164,7 @@ kubectl apply -f 4-replicas.yaml
 #### Check pod
 
 ```
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
-kubectl get services
+kubectl get all
 kubectl describe deployment phonebook
 kubectl describe pods <PODNAME-1>
 kubectl describe pods <PODNAME-2>
@@ -192,8 +184,5 @@ kubectl logs <PODNAME-2>
 ```
 kubectl delete -f 4-replicas.yaml
 
-kubectl get services
-kubectl get deployments
-kubectl get replicaset
-kubectl get pods
+kubectl get all
 ```
